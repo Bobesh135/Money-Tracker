@@ -19,16 +19,13 @@ body {
     padding: 20px;
 }
 
+/* Nový styl pro logo jako obrázek */
 .logo {
+    width: 80px;
+    height: 80px;
     margin-bottom: 20px;
-    /* Upravená barva, aby odpovídala návrhu */
     filter: drop-shadow(0 4px 10px rgba(46, 204, 113, 0.4));
 }
-
-.logo path:first-child {
-    fill: #2ECC71; /* Zelená barva z tvého návrhu */
-}
-
 
 h1 {
     font-size: 2.5rem; /* Větší písmo */
