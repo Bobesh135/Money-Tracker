@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Tracker - Přihlášení</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="login-container">
+        
+        <svg class="logo" width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 20V4C7 3.44772 7.44772 3 8 3H16C16.5523 3 17 3.44772 17 4V20L12 15L7 20Z" fill="#2ECC71"/>
+            <path d="M10.5 10H13.5M12 8.5V11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 12C10 12.8284 10.6716 13.5 11.5 13.5H12.5C13.3284 13.5 14 12.8284 14 12C14 11.1716 13.3284 10.5 12.5 10.5H11.5C10.6716 10.5 10 11.1716 10 12Z" stroke="white" stroke-width="2"/>
+        </svg>
+
+        <h1>Zadej heslo</h1>
+
+        <form method="POST" class="login-form">
+            <input type="password" name="password" placeholder="••••••••" required>
+            <button type="submit">Vstoupit</button>
+        </form>
+
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
