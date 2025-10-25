@@ -79,4 +79,143 @@ button[type="submit"]:hover {
     color: #e74c3c;
     margin-top: 15px;
     font-weight: 600;
+}/* ======================================== */
+/* === STYLY PRO DASHBOARD (HLAVNÍ STRÁNKU) === */
+/* ======================================== */
+
+.dashboard-body {
+    background-color: #f7f7f7; /* Lehce šedé pozadí pro kontrast */
+    display: block; /* Vypneme centrování z přihlašovací stránky */
 }
+
+/* --- Rychlé akce vlevo nahoře --- */
+.quick-actions {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 10px 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.quick-actions h4 {
+    margin: 5px 0 10px;
+    color: #333;
+    font-weight: 500;
+    text-align: center;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+}
+
+.action-btn.transfer { background-color: #f39c12; } /* Oranžová */
+.action-btn.expense { background-color: #f1c40f; } /* Žlutá (jako landed) */
+.action-btn.income { background-color: #2ECC71; } /* Zelená */
+
+
+/* --- Hlavní obsah s grafem --- */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.chart-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
+/* Kruhový graf vytvořený pomocí conic-gradient */
+.donut-chart {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    /* Barvy a procenta (vypočítáno z tvých dat) */
+    /* Zelená: 85.1%, Žlutá: 11.6%, Červená: 3.3% */
+    background: conic-gradient(
+        #2ECC71 0% 85.1%, 
+        #f1c40f 85.1% 96.7%, 
+        #e74c3c 96.7% 100%
+    );
+}
+
+/* Vnitřní kruh, který vytvoří "donut" efekt */
+.chart-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 75%;
+    background-color: #f7f7f7; /* Stejná barva jako pozadí stránky */
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-balance {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1.1;
+}
+
+.chart-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.chart-label.owe { color: #e74c3c; }
+.chart-label.landed { color: #f1c40f; }
+
+
+/* --- Legenda pod grafem --- */
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-right: 8px;
+}
+
+.color-box.owned { background-color: #2ECC71; }
+.color-box.landed { background-color: #f1c40f; }
+.color-box.owe { background-color: #e74c3c; }

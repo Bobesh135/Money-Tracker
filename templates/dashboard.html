@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Tracker - Přehled</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-body">
+
+    <div class="quick-actions">
+        <h4>Quick Actions</h4>
+        <div class="action-buttons">
+            <button class="action-btn transfer">⇆</button>
+            <button class="action-btn expense">-</button>
+            <button class="action-btn income">+</button>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="chart-container">
+            <div class="donut-chart">
+                <div class="chart-center">
+                    <span class="chart-label owe">{{ '{:,}'.format(data.owe).replace(',', ' ') }}Kč</span>
+                    <span class="main-balance">{{ '{:,}'.format(data.owned).replace(',', ' ') }}Kč</span>
+                    <span class="chart-label landed">{{ '{:,}'.format(data.landed).replace(',', ' ') }}Kč</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <span class="color-box owned"></span> Owned
+            </div>
+            <div class="legend-item">
+                <span class="color-box landed"></span> Landed
+            </div>
+            <div class="legend-item">
+                <span class="color-box owe"></span> Owe
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
