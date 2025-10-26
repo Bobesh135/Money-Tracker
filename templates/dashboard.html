@@ -24,25 +24,61 @@
         <div class="chart-container">
             <div class="donut-chart">
                 <div class="chart-center">
-                    <span class="chart-label owe">{{ '{:,}'.format(data.owe).replace(',', ' ') }}Kč</span>
-                    <span class="main-balance">{{ '{:,}'.format(data.owned).replace(',', ' ') }}Kč</span>
-                    <span class="chart-label landed">{{ '{:,}'.format(data.landed).replace(',', ' ') }}Kč</span>
+                    <span class="main-balance" id="main-balance-display"></span>
                 </div>
             </div>
         </div>
 
         <div class="legend">
             <div class="legend-item">
-                <span class="color-box owned"></span> Owned
+                <input type="checkbox" id="cb-owned" class="legend-checkbox owned" data-value="{{ data.owned }}" checked>
+                <label for="cb-owned">Owned</label>
             </div>
             <div class="legend-item">
-                <span class="color-box landed"></span> Landed
+                <input type="checkbox" id="cb-landed" class="legend-checkbox landed" data-value="{{ data.landed }}" checked>
+                <label for="cb-landed">Landed</label>
             </div>
             <div class="legend-item">
-                <span class="color-box owe"></span> Owe
+                <input type="checkbox" id="cb-owe" class="legend-checkbox owe" data-value="{{ data.owe }}" checked>
+                <label for="cb-owe">Owe</label>
             </div>
         </div>
     </main>
+
+    <script>
+        // Spustí se, až bude celá stránka načtená
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Najdeme si všechny checkboxy a prvek, kde se zobrazuje zůstatek
+            const checkboxes = document.querySelectorAll('.legend-checkbox');
+            const balanceDisplay = document.getElementById('main-balance-display');
+
+            // Funkce, která přepočítá a zobrazí nový zůstatek
+            function updateBalance() {
+                let currentTotal = 0;
+                
+                // Projdeme všechny checkboxy
+                checkboxes.forEach(function(checkbox) {
+                    // Pokud je checkbox zaškrtnutý...
+                    if (checkbox.checked) {
+                        // ...přičteme jeho hodnotu k celkovému součtu
+                        currentTotal += parseInt(checkbox.dataset.value, 10);
+                    }
+                });
+
+                // Zformátujeme číslo (např. 33375 na "33 375") a přidáme "Kč"
+                balanceDisplay.textContent = currentTotal.toLocaleString('cs-CZ') + 'Kč';
+            }
+
+            // Přidáme každému checkboxu "posluchače", který při změně zavolá naši funkci
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', updateBalance);
+            });
+
+            // Zavoláme funkci hned na začátku, aby se zobrazil počáteční součet
+            updateBalance();
+        });
+    </script>
 
 </body>
 </html>

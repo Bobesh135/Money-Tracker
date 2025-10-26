@@ -218,4 +218,60 @@ button[type="submit"]:hover {
 
 .color-box.owned { background-color: #2ECC71; }
 .color-box.landed { background-color: #f1c40f; }
-.color-box.owe { background-color: #e74c3c; }
+.color-box.owe { background-color: #e74c3c; }/* ======================================== */
+/* === STYLY PRO INTERAKTIVNÍ LEGENDU === */
+/* ======================================== */
+
+.legend-item label {
+    cursor: pointer; /* Změní kurzor myši při najetí na text */
+    margin-left: 8px; /* Odsadí text od checkboxu */
+}
+
+/* Skryjeme ošklivý výchozí vzhled checkboxu */
+.legend-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    
+    /* Vytvoříme vlastní vzhled - čtvereček */
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    position: relative; /* Důležité pro pozicování "fajfky" */
+    vertical-align: middle; /* Zarovná čtvereček s textem */
+    transition: all 0.2s ease;
+}
+
+/* Přiřadíme barvy podle kategorií */
+.legend-checkbox.owned { background-color: #2ECC71; }
+.legend-checkbox.landed { background-color: #f1c40f; }
+.legend-checkbox.owe { background-color: #e74c3c; }
+
+/* Vytvoříme fajfku pomocí pseudo-elementu ::after */
+.legend-checkbox::after {
+    content: '✔';
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0; /* Standardně je fajfka neviditelná */
+    transition: opacity 0.2s ease;
+}
+
+/* Když je checkbox zaškrtnutý, zviditelníme fajfku */
+.legend-checkbox:checked::after {
+    opacity: 1;
+}
+
+/* V hlavní bilanci jsme odebrali menší částky, tak upravíme styl */
+.chart-center .main-balance {
+    font-size: 4rem; /* Zvětšíme hlavní číslo, když je teď jediné */
+}
+
+/* Odstraníme staré menší labely, které už v HTML nejsou */
+.chart-label {
+    display: none;
+}
