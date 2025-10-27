@@ -38,11 +38,7 @@
                 <input type="checkbox" id="cb-landed" class="legend-checkbox landed" data-value="{{ data.landed }}" checked>
                 <label for="cb-landed">Landed</label>
             </div>
-            <div class="legend-item">
-                <input type="checkbox" id="cb-owe" class="legend-checkbox owe" data-value="{{ data.owe }}" checked>
-                <label for="cb-owe">Owe</label>
             </div>
-        </div>
     </main>
 
     <script>
@@ -50,15 +46,8 @@
             
             const checkboxes = document.querySelectorAll('.legend-checkbox');
             const balanceDisplay = document.getElementById('main-balance-display');
-            let currentBalance = 0; // Proměnná pro uložení aktuálního zůstatku
+            let currentBalance = 0;
 
-            /**
-             * Funkce pro plynulou animaci čísla z jedné hodnoty na druhou.
-             * @param {HTMLElement} obj - Element, jehož text se má změnit.
-             * @param {number} start - Počáteční číslo.
-             * @param {number} end - Cílové číslo.
-             * @param {number} duration - Délka animace v milisekundách.
-             */
             function animateValue(obj, start, end, duration) {
                 let startTimestamp = null;
                 const step = (timestamp) => {
@@ -73,10 +62,6 @@
                 window.requestAnimationFrame(step);
             }
 
-            /**
-             * Funkce, která vypočítá nový zůstatek a spustí animaci.
-             * @param {boolean} isInitialLoad - Určuje, zda jde o první načtení stránky.
-             */
             function calculateAndUpdateBalance(isInitialLoad = false) {
                 const previousBalance = currentBalance;
                 let newBalance = 0;
@@ -87,24 +72,19 @@
                     }
                 });
 
-                // Uložíme si nový zůstatek
                 currentBalance = newBalance;
 
                 if (isInitialLoad) {
-                    // Při prvním načtení stránky nastavíme hodnotu okamžitě, bez animace
                     balanceDisplay.textContent = currentBalance.toLocaleString('cs-CZ') + 'Kč';
                 } else {
-                    // Při každé další změně spustíme animaci
-                    animateValue(balanceDisplay, previousBalance, currentBalance, 500); // Animace trvá 0.5 sekundy
+                    animateValue(balanceDisplay, previousBalance, currentBalance, 500);
                 }
             }
 
-            // Přiřadíme každému checkboxu "posluchače", který při změně zavolá naši funkci
             checkboxes.forEach(function(checkbox) {
                 checkbox.addEventListener('change', () => calculateAndUpdateBalance(false));
             });
 
-            // Zavoláme funkci hned na začátku pro zobrazení počátečního součtu
             calculateAndUpdateBalance(true);
         });
     </script>
