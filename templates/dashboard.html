@@ -46,37 +46,66 @@
     </main>
 
     <script>
-        // Spustí se, až bude celá stránka načtená
         document.addEventListener('DOMContentLoaded', function() {
             
-            // Najdeme si všechny checkboxy a prvek, kde se zobrazuje zůstatek
             const checkboxes = document.querySelectorAll('.legend-checkbox');
             const balanceDisplay = document.getElementById('main-balance-display');
+            let currentBalance = 0; // Proměnná pro uložení aktuálního zůstatku
 
-            // Funkce, která přepočítá a zobrazí nový zůstatek
-            function updateBalance() {
-                let currentTotal = 0;
+            /**
+             * Funkce pro plynulou animaci čísla z jedné hodnoty na druhou.
+             * @param {HTMLElement} obj - Element, jehož text se má změnit.
+             * @param {number} start - Počáteční číslo.
+             * @param {number} end - Cílové číslo.
+             * @param {number} duration - Délka animace v milisekundách.
+             */
+            function animateValue(obj, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const currentValue = Math.floor(progress * (end - start) + start);
+                    obj.textContent = currentValue.toLocaleString('cs-CZ') + 'Kč';
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            /**
+             * Funkce, která vypočítá nový zůstatek a spustí animaci.
+             * @param {boolean} isInitialLoad - Určuje, zda jde o první načtení stránky.
+             */
+            function calculateAndUpdateBalance(isInitialLoad = false) {
+                const previousBalance = currentBalance;
+                let newBalance = 0;
                 
-                // Projdeme všechny checkboxy
                 checkboxes.forEach(function(checkbox) {
-                    // Pokud je checkbox zaškrtnutý...
                     if (checkbox.checked) {
-                        // ...přičteme jeho hodnotu k celkovému součtu
-                        currentTotal += parseInt(checkbox.dataset.value, 10);
+                        newBalance += parseInt(checkbox.dataset.value, 10);
                     }
                 });
 
-                // Zformátujeme číslo (např. 33375 na "33 375") a přidáme "Kč"
-                balanceDisplay.textContent = currentTotal.toLocaleString('cs-CZ') + 'Kč';
+                // Uložíme si nový zůstatek
+                currentBalance = newBalance;
+
+                if (isInitialLoad) {
+                    // Při prvním načtení stránky nastavíme hodnotu okamžitě, bez animace
+                    balanceDisplay.textContent = currentBalance.toLocaleString('cs-CZ') + 'Kč';
+                } else {
+                    // Při každé další změně spustíme animaci
+                    animateValue(balanceDisplay, previousBalance, currentBalance, 500); // Animace trvá 0.5 sekundy
+                }
             }
 
-            // Přidáme každému checkboxu "posluchače", který při změně zavolá naši funkci
+            // Přiřadíme každému checkboxu "posluchače", který při změně zavolá naši funkci
             checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateBalance);
+                checkbox.addEventListener('change', () => calculateAndUpdateBalance(false));
             });
 
-            // Zavoláme funkci hned na začátku, aby se zobrazil počáteční součet
-            updateBalance();
+            // Zavoláme funkci hned na začátku pro zobrazení počátečního součtu
+            calculateAndUpdateBalance(true);
         });
     </script>
 

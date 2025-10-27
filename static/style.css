@@ -1,3 +1,7 @@
+/* ======================================== */
+/* === STYLY PRO PŘIHLAŠOVACÍ STRÁNKU === */
+/* ======================================== */
+
 /* Základní nastavení */
 body {
     margin: 0;
@@ -19,7 +23,7 @@ body {
     padding: 20px;
 }
 
-/* Nový styl pro logo jako obrázek */
+/* Styl pro logo jako obrázek */
 .logo {
     width: 80px;
     height: 80px;
@@ -79,7 +83,9 @@ button[type="submit"]:hover {
     color: #e74c3c;
     margin-top: 15px;
     font-weight: 600;
-}/* ======================================== */
+}
+
+/* ======================================== */
 /* === STYLY PRO DASHBOARD (HLAVNÍ STRÁNKU) === */
 /* ======================================== */
 
@@ -128,7 +134,7 @@ button[type="submit"]:hover {
 }
 
 .action-btn.transfer { background-color: #f39c12; } /* Oranžová */
-.action-btn.expense { background-color: #f1c40f; } /* Žlutá (jako landed) */
+.action-btn.expense { background-color: #e74c3c; } /* Červená (jako Owe) */
 .action-btn.income { background-color: #2ECC71; } /* Zelená */
 
 
@@ -156,8 +162,8 @@ button[type="submit"]:hover {
     /* Barvy a procenta (vypočítáno z tvých dat) */
     /* Zelená: 85.1%, Žlutá: 11.6%, Červená: 3.3% */
     background: conic-gradient(
-        #2ECC71 0% 85.1%, 
-        #f1c40f 85.1% 96.7%, 
+        #2ECC71 0% 85.1%,
+        #f1c40f 85.1% 96.7%,
         #e74c3c 96.7% 100%
     );
 }
@@ -185,14 +191,6 @@ button[type="submit"]:hover {
     line-height: 1.1;
 }
 
-.chart-label {
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-.chart-label.owe { color: #e74c3c; }
-.chart-label.landed { color: #f1c40f; }
-
 
 /* --- Legenda pod grafem --- */
 .legend {
@@ -218,7 +216,10 @@ button[type="submit"]:hover {
 
 .color-box.owned { background-color: #2ECC71; }
 .color-box.landed { background-color: #f1c40f; }
-.color-box.owe { background-color: #e74c3c; }/* ======================================== */
+.color-box.owe { background-color: #e74c3c; }
+
+
+/* ======================================== */
 /* === STYLY PRO INTERAKTIVNÍ LEGENDU === */
 /* ======================================== */
 
